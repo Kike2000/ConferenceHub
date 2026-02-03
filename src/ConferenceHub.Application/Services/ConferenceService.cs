@@ -19,7 +19,20 @@ namespace ConferenceHub.Application.Services
 
         public async Task<List<Conference>> GetConferences()
         {
-           return await _conferenceRepository.GetConferences();
+            return await _conferenceRepository.GetConferences();
+        }
+
+        public async Task<Conference> GetConferenceByPublicId(Guid conferencePublicId)
+        {
+            return await _conferenceRepository.GetConferenceByPublicId(conferencePublicId);
+        }
+
+        public async Task<Guid> CreateConference(Conference conference)
+        {
+            conference.PublicId = Guid.NewGuid();
+            await _conferenceRepository.CreateConference(conference);
+
+            return conference.PublicId;
         }
     }
 }

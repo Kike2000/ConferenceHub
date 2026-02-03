@@ -16,18 +16,23 @@ namespace ConferenceHub.Infrastructure.Repositories
         public ConferenceRepository(ApplicationDbContext context)
         {
             _context = context;            
-        }   
+        }
 
-
-        public Task<Conference> GetConferenceByPublicId()
+        public async Task<Conference> GetConferenceByPublicId(Guid conferencePublicId)
         {
-            throw new NotImplementedException();
+            return await _context.Conference.FirstOrDefaultAsync(p => p.PublicId == conferencePublicId);
         }
 
         public async Task<List<Conference>> GetConferences()
         {
-            var conferences = _context.Conference.ToList();
-            return conferences;
+            return _context.Conference.ToList();
         }
+
+        public async Task CreateConference(Conference conference)
+        {
+            _context.Conference.Add(conference);
+            _context.SaveChanges();
+        }
+
     }
 }

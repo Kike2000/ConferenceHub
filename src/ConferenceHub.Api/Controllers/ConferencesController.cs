@@ -1,4 +1,7 @@
-﻿using ConferenceHub.Application.Services;
+﻿using ConferenceHub.Api.DTOs.Request;
+using ConferenceHub.Api.DTOs.Response;
+using ConferenceHub.Api.Mappings;
+using ConferenceHub.Application.Services;
 using ConferenceHub.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,16 +25,21 @@ namespace ConferenceHub.Api.Controllers
         }
 
         [HttpGet("{conferenceId:guid}")]
-        public IActionResult GetConference([FromRoute] Guid conferenceId)
+        public IActionResult GetConferenceById([FromRoute] Guid conferenceId)
         {
-            return Ok();
+            return Ok(_conferenceService.GetConferenceByPublicId(conferenceId));
         }
 
         [HttpPost]
-        public IActionResult AddConference([FromBody] string conferenceRequest)
+        public async Task<IActionResult> Create(
+            [FromBody] CreateConferenceRequest request)
         {
-            return Ok();
+            var conference = request.ToDomain();
+            var id = await _conferenceService.CreateConference(conference);
+
+            return Ok(id);
         }
+
 
         [HttpPut]
         public IActionResult UpdateConference([FromBody]string updateConferenceRequest)

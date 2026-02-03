@@ -9,7 +9,10 @@ namespace ConferenceHub.Application.Interfaces
 {
     public interface IConferenceRepository
     {
-        Task<Conference> GetConferenceByPublicId();
+        Task<Conference> GetConferenceByPublicId(Guid conferencePublicId);
+
         Task<List<Conference>> GetConferences();
+
+        Task CreateConference(Conference conference);
     }
 }
