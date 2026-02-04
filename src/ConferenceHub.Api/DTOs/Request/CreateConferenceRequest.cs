@@ -9,5 +9,11 @@ namespace ConferenceHub.Api.DTOs.Request
 
         [Required]
         public string Description { get; set; }
+
+        [Required]
+        public DateTimeOffset StartDate { get; set; }
+
+        [Required]
+        public DateTimeOffset EndDate { get; set; }
     }
 }
