@@ -21,11 +21,12 @@ namespace ConferenceHub.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Conference>>> GetConferences()
         {
-            return Ok(_conferenceService.GetConferences());
+            return Ok(await _conferenceService.GetConferences());
         }
 
         [HttpGet("{conferenceId:guid}")]
-        public IActionResult GetConferenceById([FromRoute] Guid conferenceId)
+        public IActionResult GetConferenceById(
+            [FromRoute] Guid conferenceId)
         {
             return Ok(_conferenceService.GetConferenceByPublicId(conferenceId));
         }
@@ -40,16 +41,20 @@ namespace ConferenceHub.Api.Controllers
             return Ok(id);
         }
 
-
         [HttpPut]
-        public IActionResult UpdateConference([FromBody]string updateConferenceRequest)
+        public async Task<IActionResult> UpdateConference(
+            [FromBody] UpdateConferenceRequest updateConferenceRequest)
         {
+            await _conferenceService.UpdateConference(updateConferenceRequest.ToDomain());
             return Ok();
         }
 
         [HttpDelete]
-        public IActionResult RemoveConference([FromBody] Guid conferenceId)
+        public async Task<IActionResult> RemoveConference(
+            [FromBody] Guid conferenceId)
         {
+            await _conferenceService.DeleteConference(conferenceId);
+
             return Ok();
         }
     }

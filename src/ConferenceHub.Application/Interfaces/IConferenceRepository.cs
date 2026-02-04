@@ -14,5 +14,9 @@ namespace ConferenceHub.Application.Interfaces
         Task<List<Conference>> GetConferences();
 
         Task CreateConference(Conference conference);
+
+        Task<bool> UpdateConference(Conference conference);
+
+        Task<bool> DeleteConference(Conference conference);
     }
 }

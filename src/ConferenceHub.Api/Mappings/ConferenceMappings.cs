@@ -23,5 +23,17 @@ namespace ConferenceHub.Api.Mappings
                 Description = conference.Description
             };
         }
+
+        public static Conference ToDomain(this UpdateConferenceRequest updateConferenceRequest) 
+        {
+            return new Conference
+            {
+                Name = updateConferenceRequest.Name,
+                Description = updateConferenceRequest.Description,
+                PublicId = updateConferenceRequest.ConferenceId
+            };
+
+        }
+
     }
 }

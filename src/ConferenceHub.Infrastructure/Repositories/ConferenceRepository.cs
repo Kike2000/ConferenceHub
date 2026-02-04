@@ -20,7 +20,7 @@ namespace ConferenceHub.Infrastructure.Repositories
 
         public async Task<Conference> GetConferenceByPublicId(Guid conferencePublicId)
         {
-            return await _context.Conference.FirstOrDefaultAsync(p => p.PublicId == conferencePublicId);
+            return await _context.Conference.AsNoTracking().FirstOrDefaultAsync(p => p.PublicId == conferencePublicId);
         }
 
         public async Task<List<Conference>> GetConferences()
@@ -34,5 +34,16 @@ namespace ConferenceHub.Infrastructure.Repositories
             _context.SaveChanges();
         }
 
+        public async Task<bool> UpdateConference(Conference conference)
+        {
+            _context.Conference.Update(conference);
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> DeleteConference(Conference conference)
+        {
+            _context.Conference.Remove(conference);
+            return await _context.SaveChangesAsync() > 0;
+        }
     }
 }

@@ -34,5 +34,31 @@ namespace ConferenceHub.Application.Services
 
             return conference.PublicId;
         }
+
+        public async Task<bool> UpdateConference(Conference conference)
+        {
+            var conferenceEntity = await _conferenceRepository.GetConferenceByPublicId(conference.PublicId);
+            if (conference == null)
+            {
+                return false;
+            }
+            conference.ConferenceId = conferenceEntity.ConferenceId;
+
+            var result = await _conferenceRepository.UpdateConference(conference);
+            return result;
+        }
+
+        public async Task<bool> DeleteConference(Guid conferencePublicId)
+        {
+            var conference = await _conferenceRepository.GetConferenceByPublicId(conferencePublicId);
+            if (conference == null)
+            {
+                return false;
+            }
+
+            var result = await _conferenceRepository.DeleteConference(conference);
+            return result;
+        }
+
     }
 }
