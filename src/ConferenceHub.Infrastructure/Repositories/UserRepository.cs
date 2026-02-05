@@ -1,10 +1,11 @@
-﻿using ConferenceHub.Domain.Entities;
+﻿using ConferenceHub.Application.Interfaces;
+using ConferenceHub.Domain.Entities;
 using ConferenceHub.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace ConferenceHub.Infrastructure.Repositories
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly ApplicationDbContext _context;
         public UserRepository(ApplicationDbContext context)
