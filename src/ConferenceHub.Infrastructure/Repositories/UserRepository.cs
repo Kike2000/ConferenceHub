@@ -13,6 +13,12 @@ namespace ConferenceHub.Infrastructure.Repositories
             _context = context;
         }
 
+        public async Task CreateUser(User user)
+        {
+            _context.User.Add(user);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<List<User>> GetUsers()
         {
             return await _context.User.ToListAsync();

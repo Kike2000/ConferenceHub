@@ -1,9 +1,7 @@
 ﻿using ConferenceHub.Api.DTOs.Request;
-using ConferenceHub.Api.DTOs.Response;
 using ConferenceHub.Api.Mappings;
 using ConferenceHub.Application.Services;
 using ConferenceHub.Domain.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConferenceHub.Api.Controllers
@@ -54,7 +52,6 @@ namespace ConferenceHub.Api.Controllers
             [FromBody] Guid conferenceId)
         {
             await _conferenceService.DeleteConference(conferenceId);
-
             return Ok();
         }
     }

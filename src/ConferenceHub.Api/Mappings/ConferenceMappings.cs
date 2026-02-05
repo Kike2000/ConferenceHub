@@ -8,19 +8,10 @@ namespace ConferenceHub.Api.Mappings
     {
         public static Conference ToDomain(this CreateConferenceRequest createConferenceRequest)
         {
-            return new Conference {
+            return new Conference 
+            {
                 Name = createConferenceRequest.Name,
                 Description = createConferenceRequest.Description,
-            };
-        }
-
-        public static CreateConferenceResponse ToCreateConferenceResponse(this Conference conference)
-        {
-            return new CreateConferenceResponse
-            {
-                ConferenceId = conference.PublicId,
-                Name = conference.Name,
-                Description = conference.Description
             };
         }
 
@@ -32,8 +23,6 @@ namespace ConferenceHub.Api.Mappings
                 Description = updateConferenceRequest.Description,
                 PublicId = updateConferenceRequest.ConferenceId
             };
-
         }
-
     }
 }

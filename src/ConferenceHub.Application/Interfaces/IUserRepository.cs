@@ -13,6 +13,8 @@ namespace ConferenceHub.Application.Interfaces
 
         Task<User> GetUserByPublicId(Guid userPublicId);
 
+        Task CreateUser(User user);
+
         Task<bool> UpdateUser(User user);
 
     }

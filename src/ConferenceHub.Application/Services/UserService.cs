@@ -1,10 +1,6 @@
 ﻿using ConferenceHub.Application.Interfaces;
 using ConferenceHub.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ConferenceHub.Application.Services
 {
@@ -26,6 +22,14 @@ namespace ConferenceHub.Application.Services
             return await _userRepository.GetUserByPublicId(userPublicId);
         }
 
+        public async Task<Guid> CreateUser(User user)
+        {
+            user.PublicId = Guid.NewGuid();
+            await _userRepository.CreateUser(user);
+
+            return user.PublicId;
+        }
+
         public async Task<bool> UpdateUser(User user)
         {
             var userEntity = await _userRepository.GetUserByPublicId(user.PublicId);
@@ -34,7 +38,10 @@ namespace ConferenceHub.Application.Services
                 return false;
             }
 
-            var result = await _userRepository.UpdateUser(user);
+            userEntity.Name = user.Name;
+            userEntity.Email = user.Email;
+            var result = await _userRepository.UpdateUser(userEntity);
+
             return result;
         }
 
