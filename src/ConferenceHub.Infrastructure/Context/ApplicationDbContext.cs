@@ -1,5 +1,6 @@
 ﻿using ConferenceHub.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace ConferenceHub.Infrastructure.Context
 {
@@ -10,5 +11,20 @@ namespace ConferenceHub.Infrastructure.Context
         }
 
         public DbSet<Conference> Conference { get; set; }
+        public DbSet<User> User { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>(builder =>
+            {
+                builder.Property(x => x.Email)
+                       .HasMaxLength(200)
+                       .IsRequired();
+
+                builder.HasIndex(x => x.Email)
+                       .IsUnique();
+            });
+        }
+
     }
 }
