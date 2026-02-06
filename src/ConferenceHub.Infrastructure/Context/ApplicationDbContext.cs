@@ -6,12 +6,13 @@ namespace ConferenceHub.Infrastructure.Context
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base (options)
-        {            
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
         }
 
         public DbSet<Conference> Conference { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<Registration> Registration { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
