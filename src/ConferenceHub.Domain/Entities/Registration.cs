@@ -18,6 +18,8 @@ namespace ConferenceHub.Domain.Entities
 
         public DateTime? RegistrationTime { get; set; }
 
+        public DateTime? UpdatedAt { get; set; }
+
         public bool Attendance { get; set; }
     }
 

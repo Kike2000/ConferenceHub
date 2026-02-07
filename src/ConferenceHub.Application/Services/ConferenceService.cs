@@ -38,7 +38,7 @@ namespace ConferenceHub.Application.Services
         public async Task<bool> UpdateConference(Conference conference)
         {
             var conferenceEntity = await _conferenceRepository.GetConferenceByPublicId(conference.PublicId);
-            if (conference == null)
+            if (conferenceEntity == null)
             {
                 return false;
             }
@@ -50,13 +50,13 @@ namespace ConferenceHub.Application.Services
 
         public async Task<bool> DeleteConference(Guid conferencePublicId)
         {
-            var conference = await _conferenceRepository.GetConferenceByPublicId(conferencePublicId);
-            if (conference == null)
+            var conferenceEntity = await _conferenceRepository.GetConferenceByPublicId(conferencePublicId);
+            if (conferenceEntity == null)
             {
                 return false;
             }
 
-            var result = await _conferenceRepository.DeleteConference(conference);
+            var result = await _conferenceRepository.DeleteConference(conferenceEntity);
             return result;
         }
 

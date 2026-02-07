@@ -1,11 +1,12 @@
-﻿using ConferenceHub.Domain.Entities;
+﻿using ConferenceHub.Application.Interfaces;
+using ConferenceHub.Domain.Entities;
 using ConferenceHub.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace ConferenceHub.Infrastructure.Repositories
 {
-    public class RegistrationRepository
+    public class RegistrationRepository : IRegistrationRepository
     {
         private readonly ApplicationDbContext _context;
         public RegistrationRepository(ApplicationDbContext context)
@@ -38,6 +39,6 @@ namespace ConferenceHub.Infrastructure.Repositories
         {
             _context.Registration.Remove(registration);
             return await _context.SaveChangesAsync() > 0;
-        }
+        }    
     }
 }
