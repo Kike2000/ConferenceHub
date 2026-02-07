@@ -12,6 +12,8 @@ builder.Services.AddScoped<IConferenceRepository, ConferenceRepository>();
 builder.Services.AddScoped<ConferenceService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<IRegistrationRepository, RegistrationRepository>();
+builder.Services.AddScoped<RegistrationService>();
 
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

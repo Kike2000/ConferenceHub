@@ -14,13 +14,13 @@ namespace ConferenceHub.Domain.Entities
 
         public Guid ParticipantPublicId { get; set; }
 
-        public Guid EventPublicId { get; set; }
+        public Guid ConferencePublicId { get; set; }
 
         public DateTime? RegistrationTime { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
 
-        public bool Attendance { get; set; }
+        public bool Attendance { get; set; } = true;
     }
 
 }

@@ -11,9 +11,13 @@ namespace ConferenceHub.Application.Services
     public class RegistrationService
     {
         private readonly IRegistrationRepository _registrationRepository;
-        public RegistrationService(IRegistrationRepository registrationRepository)
+        private readonly IConferenceRepository _conferenceRepository;
+        public RegistrationService(
+            IRegistrationRepository registrationRepository, 
+            IConferenceRepository conferenceRepository)
         {
             _registrationRepository = registrationRepository;
+            _conferenceRepository = conferenceRepository;
         }
 
         public async Task<List<Registration>> GetRegistrations()
@@ -38,7 +42,8 @@ namespace ConferenceHub.Application.Services
         public async Task<bool> UpdateRegistration(Registration registration)
         {
             var registrationEntity = await _registrationRepository.GetRegistrationByPublicId(registration.PublicId);
-            if (registrationEntity == null)
+            var conferenceEntity = await _conferenceRepository.GetConferenceByPublicId(registration.ConferencePublicId);
+            if (registrationEntity is null && conferenceEntity is null)
             {
                 return false;
             }
