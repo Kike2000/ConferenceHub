@@ -13,6 +13,7 @@ namespace ConferenceHub.Infrastructure.Context
         public DbSet<Conference> Conference { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<Registration> Registration { get; set; }
+        public DbSet<Area> Area { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
